@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import HomePage from "./HomePage";
+import About from "./About";
+import { Route, Switch, Redirect } from "react-router-dom";
+import NotFoundPage from "./NotFoundPage";
+import ManageCoursePage from "./ManageCoursePage";
+import CoursePage from "./CoursePage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container-fluid">
+      <ToastContainer autoClose={3000} hideProgressBar />
+      <Switch>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/about" component={About} />
+        <Route path="/courses" component={CoursePage} />       
+        <Route path="/course/:slug" component={ManageCoursePage} />
+        <Route path="/course" component={ManageCoursePage} />
+        <Redirect from="/about-page" to="about" />
+        <Route component={NotFoundPage} />
+      </Switch>
     </div>
-  );
+  )
 }
 
 export default App;
